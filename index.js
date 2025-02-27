@@ -22,35 +22,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector("main").appendChild(sectionElm);
 
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=100") // Hent 50 Pokémoner
-        .then(response => response.json())
-        .then(data => {
-            let divElm = document.createElement("div");
-            divElm.classList.add("div_flex");
+    let offset = 0; // Start ved Pokémon nr. 0
+    const limit = 20; // Hent 20 Pokémoner ad gangen
+    let isFetching = false; // Forhindrer dobbelt-requests
 
-            divElm.innerHTML = data.results.map(pokemon => {
-                let id = pokemon.url.split("/").slice(-2, -1)[0]; // Hent ID fra URL
+    const divElm = document.createElement("div");
+    divElm.classList.add("div_flex");
+    sectionElm.appendChild(divElm);
 
-                return `
-                    <div class="roed__baggrund">
-                        <a href="detail.html?name=${pokemon.name}">
-                            <article>
-                                <div class="poke_flex">
-                                    <div class="pokebaggrund">
-                                        <div class="baggrund__poke">
-                                            <p>#${id}</p> 
-                                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="${pokemon.name}">
-                                            <h2>${pokemon.name}</h2>
+    function fetchPokemons() {
+        if (isFetching) return; // Undgå flere requests på én gang
+        isFetching = true;
+
+        fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
+            .then(response => response.json())
+            .then(data => {
+                data.results.forEach(pokemon => {
+                    let id = pokemon.url.split("/").slice(-2, -1)[0];
+
+                    let pokemonHTML = `
+                        <div class="roed__baggrund">
+                            <a href="detail.html?name=${pokemon.name}">
+                                <article>
+                                    <div class="poke_flex">
+                                        <div class="pokebaggrund">
+                                            <div class="baggrund__poke">
+                                                <p>#${id}</p>
+                                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="${pokemon.name}">
+                                                <h2>${pokemon.name}</h2>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                        </a>
-                    </div>
-                `;
-            }).join("");
+                                </article>
+                            </a>
+                        </div>
+                    `;
+                    divElm.insertAdjacentHTML("beforeend", pokemonHTML);
+                });
 
-            sectionElm.appendChild(divElm);
-        })
-        .catch(error => console.error("Fejl ved hentning af Pokémon-data:", error));
+                offset += limit; // Opdater offset for næste batch
+                isFetching = false;
+            })
+            .catch(error => {
+                console.error("Fejl ved hentning af Pokémon-data:", error);
+                isFetching = false;
+            });
+    }
+
+    // **Scroll event listener**
+    window.addEventListener("scroll", () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+            fetchPokemons(); // Hent flere Pokémoner, når man scroller ned
+        }
+    });
+
+    // **Hent første batch af Pokémoner**
+    fetchPokemons();
 });
