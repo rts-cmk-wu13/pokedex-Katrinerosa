@@ -1,169 +1,102 @@
-.topbox{
-    width: 525px;
-    height: 180px;
-    background-color: #DC0A2D;
-    display: flex;
-    flex-direction: column;
-    
+/* 🟥 HEADER */
+.topbox {
+  /* width: 100%; */
+  max-width: 600px;
+  background-color: #dc0a2d;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin: auto;
 }
 
-h1{
-    color: white;
-    font-size: 40px;
-    margin-left: 2em;
-    padding-top: 15px;
+h1 {
+  color: white;
+  font-size: 40px;
+  margin-left: 2em;
 }
 
-input{
-    width: 350px;
-    border-radius: 10px;
-    font-size: large;
-    margin-left: 2em;
-    margin-right: 2em;
-}
-
-.div_flex{
- display: grid;
-grid-template-columns: repeat(3, 1fr); 
-width: 360px;
-height: 550px;
-
-
-
-
-}
-
-.div_flex a{
-    text-decoration: none;
-    color: black;
-}
-
-
-
-.pokelist{
-    
-    width: 525px;
-    height: auto + 5em;
-    margin-left: 2em;
-    border: 4px solid #DC0A2D;
-    padding-bottom: 15em;
-   
-}
-
-.poke_flex img{
-    width: 120px;
-    height: 120px;
-    display: flex;
-    
-    
-    margin-left: 15px;
-    
-}
-
-.roed__baggrund{
-    width: 174px;
-    height: 10px;
-
-
-
-
-.baggrund__poke{
-    
-    width: 150px;
-    height: 150px;
-    background-color: lightgray;
-    border-radius: 5px;
-    margin-left: 0.7em;
-    margin-top: 1em;
-
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    
-}
-
-
-
-
-
-h2{
-    font-size: 16px;
-    text-align: center;
-    
-}
-
-.hvid__back{
-    background-color: white;
-    width: 400px;
-    height: 600px;
-    
-    
-   
-}
-
-.hashtag{
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    border-radius: 50%;
-}
-.hashtag a{
-
-    text-decoration: none;
-    color: #DC0A2D;
-    margin-left: 8px; 
-    font-size: 30px;
-}
-
-.head__flex{
-    display: flex;
-   
-    margin-left: 3em;
-    
-}
-.head__flex .fa-solid{
-    margin-right: 1em;
-}
-
-
-
-label{
-    display: flex;
-}
-
-
-
-.head__flex {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-bottom: 300px;}
 .search-box {
-    
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    padding: 5px;
-    background-color: white;
-    width: 350px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 5px;
+  background-color: white;
+  width: 100%;
+  max-width: 350px;
 }
+
 .search-box i {
-    margin-right: 5px;
-    color: #DC0A2D;
-  
-
+  margin-right: 5px;
+  color: #dc0a2d;
 }
+
 .search-box input {
-    border: none;
-    outline: none;
-    width: 200px;
-    height: 30px;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 30px;
 }
 
-.baggrund__poke p {
-    font-size: 14px;
-    color: gray;
-    margin-top: 5px;
-    text-align: end;
-    
+/* 🟩 POKÉMON LISTE */
+.pokelist {
+  width: 100%;
+  max-width: 600px;
+  min-height: 500px; /* Sørger for plads */
+  margin: auto;
+  border: 4px solid #dc0a2d;
+  padding-bottom: 5em;
 }
+
+.div_flex {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(150px, 1fr)
+  ); /* Automatisk tilpasning */
+  gap: 20px;
+  width: 100%;
+}
+
+/* 🎨 POKÉMON KORT */
+.roed__baggrund {
+  min-width: 104px;
+  max-width: 180px;
+  min-height: 200px;
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+  border: 2px solid #EFEFEF;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.roed__baggrund img {
+  width: 120px;
+  height: 120px;
+}
+
+.roed__baggrund h2 {
+  font-size: 16px;
+  text-transform: capitalize;
+  text-decoration: none;
+  list-style: none;
+  margin-top: 5px;
+}
+
+.baggrund__poke {
+  width: 100%;
+  max-width: 150px;
+  background-color: lightgray;
+  border-radius: 5px;
+  margin: auto;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+/* 🏆 FORBEDRINGER */
+.head__flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Sørger for bedre justering */
+  gap: 10px;
 }
