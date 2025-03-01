@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let offset = 0; // Start ved Pokémon nr. 0
     const limit = 20; // Hent 20 Pokémoner ad gangen
-    let isFetching = false; // Forhindrer dobbelt-requests
+    let isFetching = false; // Forhindrer dobbelt-requests meget need
 
     const divElm = document.createElement("div");
     divElm.classList.add("div_flex");
